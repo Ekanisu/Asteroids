@@ -1,8 +1,9 @@
 import pygame
 from constants import * 
 from player import * 
+
 def main():
-    pygame.init
+    pygame.init()
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
@@ -20,6 +21,8 @@ def main():
         screen.fill(0)
 
         dt = clock.tick(60) /1000
+
+        player.update(dt)
 
         player.draw(screen)
 
