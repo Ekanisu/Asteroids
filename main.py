@@ -4,6 +4,12 @@ from player import *
 from AsteroidField import *
 from asteroid import *
 from shot import *
+import math
+
+def check_circle_collision(obj1, obj2):
+    """Check if two circular objects collide by comparing their distances and radii."""
+    distance = math.sqrt((obj1.position.x - obj2.position.x) ** 2 + (obj1.position.y - obj2.position.y) ** 2)
+    return distance < (obj1.radius + obj2.radius)
 
 def main():
     pygame.init()
@@ -51,6 +57,12 @@ def main():
                 print("Game over!")
                 pygame.quit()
                 exit()
+
+        for asteroid in asteroids:
+            for shot in shots: 
+                if check_circle_collision(asteroid, shot):
+                    asteroid.split()
+                    shot.kill()
 
         for shot in shots:  # Update and draw shots
             shot.update(dt)
